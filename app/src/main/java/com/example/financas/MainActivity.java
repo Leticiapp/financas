@@ -30,7 +30,22 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
     }
+
+    public void showCadastro (View view){
+        setContentView(R.layout.activity_cadastro);
+    }
+    public void showPesquisar (View view){
+        setContentView(R.layout.activity_pesquisar);
+    }
+    public void showExtrato (View view){
+        setContentView(R.layout.activity_extrato);
+    }
+    public void showLista (View view){
+        setContentView(R.layout.activity_lista);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
