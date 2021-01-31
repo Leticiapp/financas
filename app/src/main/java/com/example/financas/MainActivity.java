@@ -2,6 +2,7 @@ package com.example.financas;
 
 import android.os.Bundle;
 
+import com.example.financas.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
