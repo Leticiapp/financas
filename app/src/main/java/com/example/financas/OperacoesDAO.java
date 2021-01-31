@@ -61,4 +61,60 @@ public class OperacoesDAO {
         return OperacoesList;
     }
 
+
+    public List<Operacoes> getExtrato() {
+        List<Operacoes> OperacoesList = new ArrayList<>();
+        Cursor cursor = read.query(DBHelper.TABLE_NAME, new String[]{"id_operacao", "tp_operacao", "op_desc", "dt_operacao", "valor_operacao"},
+                null, null, null, null, "tp_operacao desc", String.valueOf(15));
+        while(cursor.moveToNext()) {
+            Operacoes Operacoes = new Operacoes();
+
+            Long id_operacao = cursor.getLong(cursor.getColumnIndex("id_operacao"));
+            String tp_operacao = cursor.getString(cursor.getColumnIndex("tp_operacao"));
+            String op_desc = cursor.getString(cursor.getColumnIndex("op_desc"));
+            Long dt_operacao = cursor.getLong(cursor.getColumnIndex("dt_operacao"));
+            Double valor_operacao = cursor.getDouble(cursor.getColumnIndex("valor_operacao"));
+
+
+            Operacoes.setId_operacao(id_operacao);
+            Operacoes.setTp_operacao(tp_operacao);
+            Operacoes.setOp_desc(op_desc);
+            Operacoes.setDt_operacao(dt_operacao);
+            Operacoes.setValor_operacao(valor_operacao);
+
+            OperacoesList.add(Operacoes);
+        }
+        return OperacoesList;
+    }
+
+
+
+    public List<Operacoes> getPesquisaDt(long dt_min, long dt_max) {
+        List<Operacoes> OperacoesList = new ArrayList<>();
+        Cursor cursor = read.query(DBHelper.TABLE_NAME, new String[]{"id_operacao", "tp_operacao", "op_desc", "dt_operacao", "valor_operacao"},
+                "dt_operacao", new String[]{"between"+ dt_min + "and" + dt_max}, null, null, "tp_operacao desc");
+        while(cursor.moveToNext()) {
+            Operacoes Operacoes = new Operacoes();
+
+            Long id_operacao = cursor.getLong(cursor.getColumnIndex("id_operacao"));
+            String tp_operacao = cursor.getString(cursor.getColumnIndex("tp_operacao"));
+            String op_desc = cursor.getString(cursor.getColumnIndex("op_desc"));
+            Long dt_operacao = cursor.getLong(cursor.getColumnIndex("dt_operacao"));
+            Double valor_operacao = cursor.getDouble(cursor.getColumnIndex("valor_operacao"));
+
+
+            Operacoes.setId_operacao(id_operacao);
+            Operacoes.setTp_operacao(tp_operacao);
+            Operacoes.setOp_desc(op_desc);
+            Operacoes.setDt_operacao(dt_operacao);
+            Operacoes.setValor_operacao(valor_operacao);
+
+            OperacoesList.add(Operacoes);
+        }
+        return OperacoesList;
+    }
+
+
+
+
 }

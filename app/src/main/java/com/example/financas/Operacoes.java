@@ -1,7 +1,6 @@
 package com.example.financas;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Operacoes implements Serializable {
     private Long id_operacao;
@@ -34,7 +33,7 @@ public class Operacoes implements Serializable {
         this.tp_operacao = tp_operacao;
     }
 
-    public Long getDt_operacao() {
+    public int getDt_operacao() {
         return dt_operacao;
     }
 
