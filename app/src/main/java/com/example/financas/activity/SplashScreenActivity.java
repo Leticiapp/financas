@@ -1,10 +1,12 @@
-package com.example.financas;
+package com.example.financas.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.financas.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {

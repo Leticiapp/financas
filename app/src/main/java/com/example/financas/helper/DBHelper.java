@@ -1,4 +1,4 @@
-package com.example.financas;
+package com.example.financas.helper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

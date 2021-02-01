@@ -1,4 +1,4 @@
-package com.example.financas;
+package com.example.financas.model;
 
 import java.io.Serializable;
 import java.util.Date;
