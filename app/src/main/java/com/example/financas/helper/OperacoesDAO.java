@@ -157,9 +157,11 @@ public class OperacoesDAO {
             if (op_desc.equals("Salário"))
             ListaSaldo.setImg(R.drawable.salario);
 
-            if (op_desc.equals("Transferências"))
+            if (op_desc.equals("Tranferências"))
             ListaSaldo.setImg(R.drawable.transferencias);
 
+            if (op_desc.equals("Outros"))
+                ListaSaldo.setImg(R.drawable.outros);
 
             ListaPorCatg.add(ListaSaldo);
 
