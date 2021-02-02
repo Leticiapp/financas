@@ -7,17 +7,31 @@
 
     <Button
         android:id="@+id/buttonP"
-        android:layout_width="196dp"
-        android:layout_height="69dp"
-        android:layout_marginBottom="72dp"
+        android:layout_width="139dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="44dp"
         android:onClick="pesquisar"
         android:text="Pesquisar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintEnd_toStartOf="@+id/buttonP2"
+        app:layout_constraintHorizontal_bias="0.911"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
-        app:layout_constraintVertical_bias="0.894" />
+        app:layout_constraintVertical_bias="0.009" />
+
+    <Button
+        android:id="@+id/buttonP2"
+        android:layout_width="139dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="48dp"
+        android:onClick="voltar"
+        android:text="Voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
+        app:layout_constraintVertical_bias="0.009" />
 
     <EditText
         android:id="@+id/editTextDateInicial"
@@ -25,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:ems="10"
-        android:inputType="date"
         android:hint="DD/MM/AAAA"
+        android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/editTextDateFinal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -95,8 +109,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="79dp"
         android:ems="10"
-        android:inputType="date"
         android:hint="DD/MM/AAAA"
+        android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView5"

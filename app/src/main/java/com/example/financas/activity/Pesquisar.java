@@ -20,6 +20,9 @@ import com.example.financas.adapter.AdapterExtrato;
 import com.example.financas.helper.OperacoesDAO;
 import com.example.financas.model.Operacoes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Pesquisar extends AppCompatActivity {
@@ -50,17 +53,37 @@ public class Pesquisar extends AppCompatActivity {
         int rb = rg.getCheckedRadioButtonId();
         RadioButton rbb = findViewById(rb);
 
-        dtI = Long.valueOf(dtInicial.getText().toString().replaceAll("[^\\d.]|\\.", ""));
-        dtF = Long.valueOf(dtFinal.getText().toString().replaceAll("[^\\d.]|\\.", ""));
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
         try {
-            OperacoesDAO operacoesDAO = new OperacoesDAO(getApplicationContext());
-            operacoesLista = operacoesDAO.search(dtI, dtF, (String) rbb.getText());
-            Intent i = new Intent(Pesquisar.this, PesquisaResultado.class);
-            startActivity(i);
-        } catch (Exception e){
-            Toast.makeText(this,"Não foi encontrado", Toast.LENGTH_SHORT).show();
+            Date dtI = formatter.parse(dtInicial.getText().toString());
+            Date dtF = formatter.parse(dtFinal.getText().toString());
+
+            long millisecondsI = dtI.getTime();
+            long millisecondsF = dtF.getTime();
+
+            try {
+                OperacoesDAO operacoesDAO = new OperacoesDAO(getApplicationContext());
+                operacoesLista = operacoesDAO.search(millisecondsI, millisecondsF, (String) rbb.getText());
+                Intent i = new Intent(Pesquisar.this, PesquisaResultado.class);
+                startActivity(i);
+            } catch (Exception e){
+                Toast.makeText(this,"Não foi encontrado", Toast.LENGTH_SHORT).show();
+            }
+
+
+        } catch (ParseException e) {
+            Toast.makeText(this, "Data no formato incorreto!", Toast.LENGTH_SHORT).show();
         }
+
+
+    }
+
+    public void voltar(View view){
+
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
+        finish();
 
     }
 }

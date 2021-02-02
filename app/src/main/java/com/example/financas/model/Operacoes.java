@@ -33,9 +33,7 @@ public class Operacoes implements Serializable {
         this.tp_operacao = tp_operacao;
     }
 
-    public int getDt_operacao() {
-        return dt_operacao;
-    }
+    public Long getDt_operacao() {return dt_operacao; }
 
     public void setDt_operacao(Long dt_operacao) {
         this.dt_operacao = dt_operacao;

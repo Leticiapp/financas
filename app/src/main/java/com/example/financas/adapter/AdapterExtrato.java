@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.financas.model.Operacoes;
 import com.example.financas.R;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -49,13 +53,27 @@ public class AdapterExtrato extends RecyclerView.Adapter<AdapterExtrato.MyViewHo
         String val = "R$ " + nf.format(operacao.getValor_operacao());
 
         holder.tipo.setText(operacao.getTp_operacao());
-        holder.data.setText(operacao.getDt_operacao().toString());
-        holder.valor.setText(val);
-        if(operacao.getTp_operacao().toString().equals("Débito")){
-            holder.valor.setText("- " + val);
-        }else{
-            holder.valor.setText("+ " + val);
+
+        Date dt = new Date (operacao.getDt_operacao());
+        System.out.println("data2:" + dt);
+
+
+        DateFormat originalFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy", Locale.ENGLISH);
+        DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        try {
+            date = originalFormat.parse(String.valueOf(dt));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        System.out.println("data2:" + date);
+        String formattedDate = targetFormat.format(date);
+        System.out.println("data211:" + formattedDate);
+
+
+        holder.data.setText(String.valueOf(formattedDate));
+        holder.valor.setText(val);
+
     }
 
     @Override

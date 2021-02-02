@@ -1,6 +1,8 @@
 package com.example.financas.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
@@ -14,19 +16,28 @@ import com.example.financas.adapter.AdapterExtrato;
 
 public class PesquisaResultado extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private AdapterExtrato pesquisaAdapter;
+    private AdapterExtrato AdapterExtrato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesquisa_resultado);
 
-        pesquisaAdapter = new AdapterExtrato(Pesquisar.operacoesLista);
+        AdapterExtrato = new AdapterExtrato(Pesquisar.operacoesLista);
 
         recyclerView = findViewById(R.id.recyclerViewPesquisaResultado);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
-        recyclerView.setAdapter(pesquisaAdapter);
+        recyclerView.setAdapter(AdapterExtrato);
+    }
+
+
+    public void voltar(View view){
+
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
+        finish();
+
     }
 }

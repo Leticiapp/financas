@@ -1,8 +1,10 @@
 package com.example.financas.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -14,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.financas.model.Operacoes;
 import com.example.financas.helper.OperacoesDAO;
 import com.example.financas.R;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Cadastro extends AppCompatActivity {
     RadioGroup rg;
@@ -53,6 +59,7 @@ public class Cadastro extends AppCompatActivity {
     }
 
     public void cadastrar(View view){
+
         rg = (RadioGroup) findViewById(R.id.radioGroup);
         int rb = rg.getCheckedRadioButtonId();
         RadioButton rbb = findViewById(rb);
@@ -60,14 +67,59 @@ public class Cadastro extends AppCompatActivity {
         EditText valor = findViewById(R.id.editTextValor);
         EditText data = findViewById(R.id.editTextDate);
 
-        Operacoes op = new Operacoes();
-        op.setTp_operacao((String) rbb.getText());
-        op.setOp_desc((String) spn.getSelectedItem());
-        op.setValor_operacao(Double.parseDouble(valor.getText().toString()));
-        op.setDt_operacao(Long.valueOf(data.getText().toString().replaceAll("[^\\d.]|\\.", "")));
-        operacoesDAO.insertOperacoes(op);
+        if (rbb == null)
+            Toast.makeText(this, "Selecione o tipo da operação!", Toast.LENGTH_SHORT).show();
+        else
+            if (valor.length() == 0)
+                Toast.makeText(this, "Forneça o valor!", Toast.LENGTH_SHORT).show();
+            else
+                if (data.length() == 0)
+                    Toast.makeText(this, "Forneça a data!", Toast.LENGTH_SHORT).show();
+                else {
+                    Operacoes op = new Operacoes();
+                    op.setTp_operacao((String) rbb.getText());
+                    op.setOp_desc((String) spn.getSelectedItem());
 
-        Toast.makeText(this,"Cadastro realizado",Toast.LENGTH_SHORT).show();
+                    if (rbb.getText().equals("Débito"))
+                        op.setValor_operacao(Double.parseDouble('-'+valor.getText().toString()));
+                    else
+                        op.setValor_operacao(Double.parseDouble(valor.getText().toString()));
+
+
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+                    try {
+                        Date dt = formatter.parse(data.getText().toString());
+                        System.out.println("data:" + dt);
+                        long milliseconds = dt.getTime();
+                        op.setDt_operacao(milliseconds);
+                        System.out.println("data2:" + milliseconds);
+
+                    } catch (ParseException e) {
+                        Toast.makeText(this, "Data no formato incorreto!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    operacoesDAO.insertOperacoes(op);
+
+                    data.setEnabled(false);
+                    rg.setEnabled(false);
+                    spn.setEnabled(false);
+                    valor.setEnabled(false);
+
+                    Button btn = (Button) findViewById(R.id.button);
+                    btn.setEnabled(false);
+
+                    Toast.makeText(this, "Cadastro realizado", Toast.LENGTH_SHORT).show();
+
+                }
+    }
+
+
+    public void voltar(View view){
+
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
+        finish();
+
     }
 
 }
