@@ -86,7 +86,7 @@ public class Cadastro extends AppCompatActivity {
                         op.setValor_operacao(Double.parseDouble(valor.getText().toString()));
 
 
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     try {
                         Date dt = formatter.parse(data.getText().toString());
                         System.out.println("data:" + dt);
